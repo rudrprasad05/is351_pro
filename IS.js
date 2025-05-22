@@ -3,14 +3,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import {
   getAuth,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // Optional: For feedback (Firestore)
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // Your Firebase config here
@@ -20,7 +20,7 @@ const firebaseConfig = {
   projectId: "your-project-id",
   storageBucket: "your-project-id.appspot.com",
   messagingSenderId: "XXXXXXXXXXXX",
-  appId: "YOUR_APP_ID"
+  appId: "YOUR_APP_ID",
 };
 
 // Initialize Firebase services
@@ -29,17 +29,17 @@ const auth = getAuth(app);
 const db = getFirestore(app); // for feedback (optional)
 
 // Handle Sign In
-const signInForm = document.querySelector('.signin-form');
+const signInForm = document.querySelector(".signin-form");
 if (signInForm) {
-  signInForm.addEventListener('submit', (e) => {
+  signInForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = signInForm['email'].value;
-    const password = signInForm['password'].value;
+    const email = signInForm["email"].value;
+    const password = signInForm["password"].value;
 
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         alert("Signed in successfully!");
-        window.location.href = "Home.html";
+        window.location.href = "index.html";
       })
       .catch((error) => {
         alert("Sign-in error: " + error.message);
@@ -48,17 +48,17 @@ if (signInForm) {
 }
 
 // Handle Register
-const registerForm = document.querySelector('.register-form');
+const registerForm = document.querySelector(".register-form");
 if (registerForm) {
-  registerForm.addEventListener('submit', (e) => {
+  registerForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = registerForm['reg-email'].value;
-    const password = registerForm['reg-password'].value;
+    const email = registerForm["reg-email"].value;
+    const password = registerForm["reg-password"].value;
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         alert("Registered successfully!");
-        window.location.href = "SignIn.html";
+        window.location.href = "sign-in.html";
       })
       .catch((error) => {
         alert("Registration error: " + error.message);
@@ -67,20 +67,20 @@ if (registerForm) {
 }
 
 // Optional: Handle Feedback Submission
-const contactForm = document.querySelector('.contact-form');
+const contactForm = document.querySelector(".contact-form");
 if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const name = contactForm['name'].value;
-    const email = contactForm['email'].value;
-    const message = contactForm['message'].value;
+    const name = contactForm["name"].value;
+    const email = contactForm["email"].value;
+    const message = contactForm["message"].value;
 
     try {
       await addDoc(collection(db, "feedbacks"), {
         name,
         email,
         message,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
       alert("Feedback submitted!");
       contactForm.reset();

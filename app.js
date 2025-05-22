@@ -41,7 +41,7 @@ if (registerForm) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         alert("Registration successful!");
-        window.location.href = "SignIn.html";
+        window.location.href = "sign-in.html";
       })
       .catch((error) => {
         alert(error.message);
@@ -60,7 +60,7 @@ if (signinForm) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         alert("Sign-in successful!");
-        window.location.href = "Home.html";
+        window.location.href = "index.html";
       })
       .catch((error) => {
         alert(error.message);
